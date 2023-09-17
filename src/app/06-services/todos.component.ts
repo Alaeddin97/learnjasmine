@@ -5,21 +5,21 @@ import { TodoService } from './todo.service'
   providedIn:'root'
 })
 export class TodosComponent { 
-  todos: any[] = [];
+  todos:any[] = [];
   message: any; 
 
   constructor(private service: TodoService) {}
 
   ngOnInit() { 
-    this.service.getTodos().subscribe(
-      t => this.todos = []);
+    this.service.getTodos().subscribe(t => this.todos = t)
   }
 
   add() { 
     var newTodo = { title: '... ' };
+
     this.service.add(newTodo).subscribe(
-      (      t: any) => this.todos.push(t),
-      (      err: any) => this.message = err);
+      t => this.todos.push(t),
+      error => this.message = error);
   }
 
   delete(id: any) {
